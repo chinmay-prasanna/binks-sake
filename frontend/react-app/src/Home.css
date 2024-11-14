@@ -1,0 +1,23 @@
+#home {
+    display: flex;
+}
+
+#song-list {
+    width: 50%;
+}
+
+#audio-player {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 25%;
+    height: fit-content;
+    align-items: center;
+    margin-top: 10px;
+    background-color: aquamarine;
+    left: 60%;
+}
+
+#controls {
+    margin-top: 20px;
+}
