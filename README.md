@@ -3,6 +3,7 @@ A self hosted service to read music from local directories and stream them to yo
 
 ## Setup
 ### Docker compose setup -
+(Docker and docker compose installation required, if that had to be told)
 ```
 docker compose up --build
 ```
