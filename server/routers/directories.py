@@ -15,10 +15,10 @@ def get_db():
         db.close()
 
 @router.post("/create/", response_model=schemas.DirectoryResponse)
-def create_directory(directory: schemas.DirectoryCreate, db: Session = Depends(get_db)):
+def create_directory(directory: schemas.DirectoryCreate, user: models.User = Depends(auth.get_current_user), db: Session = Depends(get_db)):
     dir_file_exists = orm.get_existing_directory(
         db=db,
-        user_id=directory.user_id,
+        user_id=user.id,
         dir_name=directory.dir_name,
         dir_path=directory.dir_path
     )
@@ -36,7 +36,7 @@ def create_directory(directory: schemas.DirectoryCreate, db: Session = Depends(g
             raise HTTPException(status_code=400, detail="Invalid folder name")
 
     try:
-        db_directory = orm.create_directory(db, directory)
+        db_directory = orm.create_directory(db, directory, user.id)
         return db_directory
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

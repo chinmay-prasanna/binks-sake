@@ -2,18 +2,16 @@ import {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
-    const navigate = useNavigate()
+function Signup() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
 
-    async function loginUser() {
-        console.log(username, password)
+    async function createUser() {
         try {
-            const {data} = await axios.post("http://localhost:8000/api/token/", {username: username, password: password})
-            const access_token = data.access_token
-            localStorage.setItem("access", access_token)
-            navigate("/")
+            const {data} = await axios.post("http://localhost:8000/user/create/", {username: username, email: email, password: password})
+            navigate("/login")
         } catch (error) {
             console.error(error)
         }
@@ -22,10 +20,11 @@ function Login() {
     return (
         <div>
             <input onChange={(e) => setUsername(e.target.value)} placeholder='username'></input>
+            <input onChange={(e) => setEmail(e.target.value)} placeholder='email'></input>
             <input onChange={(e) => setPassword(e.target.value)} placeholder='password'></input>
-            <button type='submit' onClick={loginUser}>Submit</button>
+            <button type='submit' onClick={createUser}>Submit</button>
         </div>
     )
 }
 
-export default Login;
+export default Signup;

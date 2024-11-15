@@ -19,7 +19,6 @@ class UserResponse(UserBase):
 
 
 class DirectoryBase(BaseModel):
-    user_id: UUID
     dir_name: str
     dir_path: str
     description: Optional[str] = None
@@ -31,6 +30,7 @@ class DirectoryCreate(DirectoryBase):
 
 
 class DirectoryResponse(DirectoryBase):
+    user_id: UUID
     id: int
 
     class Config:

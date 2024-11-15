@@ -21,9 +21,12 @@ def get_db():
         db.close()
 
 @router.get("/songs")
-async def get_song_list(song: str=None, user: models.User = Depends(auth.get_current_user), db: Session = Depends(get_db)):
+async def get_song_list(song: str=None, directory_id:int=None, user: models.User = Depends(auth.get_current_user), db: Session = Depends(get_db)):
     res = {}
-    song_directories = orm.get_directories(db, user.id)
+    if directory_id:
+        song_directories = [orm.get_directory(db=db, id=directory_id)]
+    else:
+        song_directories = orm.get_directories(db, user.id)
     i = 0
     for directory in song_directories:
         try:
@@ -54,6 +57,9 @@ async def stream(song, request: Request):
         if file_size/(1024*1024) < 0.5:
             return JSONResponse({"detail":"file error, check your audio file"}, status_code=400)
         range_header = request.headers.get("range", None)
+        
+        start = 0
+        end = file_size - 1
         
         if range_header:
             range_values = range_header.strip().split("=")[-1]

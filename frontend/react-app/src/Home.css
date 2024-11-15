@@ -1,3 +1,39 @@
+.audio-track {
+    width: 250px;
+    height: 5px;
+    background-color: red;
+    position: relative;
+}
+ 
+.time {
+    width: 0;
+    height: 5px;
+    background-color: black;
+    position: absolute;
+}
+
+.seekbar {
+    width: 0;
+    height: 5px;
+    background-color: brown;
+    position: absolute;
+    opacity: 0;
+}
+
+.seekbar-icon {
+    margin: 0;
+    padding: 0;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: -5px;    
+    background-color: brown;
+    border-radius: 50%;
+    border: 2px solid white;
+    left: 0;
+    transform: translateX(-50%);
+    opacity: 0;
+}
 #home {
     display: flex;
 }
