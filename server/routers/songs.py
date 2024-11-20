@@ -47,9 +47,10 @@ async def get_song_list(song: str=None, directory_id:int=None, user: models.User
     return JSONResponse(res)
 
 @router.get("/play")
-async def stream(song, request: Request):
+async def stream(song, dir, request: Request, db: Session = Depends(get_db)):
     song = urllib.parse.unquote(song)
-    file_path = f"{SONGS_DIR}/{song}"
+    directory = orm.get_directory(db=db, id=dir)
+    file_path = f"{directory.dir_path}/{directory.dir_name}/{song}"
     file = pathlib.Path(file_path)
     
     if file.is_file():
@@ -96,4 +97,4 @@ async def stream(song, request: Request):
 
         return response
     else:
-        return JSONResponse({"detail":"Invalid song name"})
+        return JSONResponse({"detail":"Invalid song name"}, status_code=400)

@@ -1,0 +1,77 @@
+
+
+.audio-track {
+    width: 250px;
+    height: 8px;
+    background-color: white;
+    position: relative;
+    border: 0.5px solid black;
+}
+ 
+.time {
+    width: 0;
+    height: 6px;
+    background-color: black;
+    position: absolute;
+}
+
+.seekbar {
+    width: 0;
+    height: 6px;
+    background-color: black;
+    position: absolute;
+    opacity: 0;
+}
+
+.seekbar-icon {
+    margin: 0;
+    padding: 0;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: -3px;    
+    background-color: black;
+    border-radius: 50%;
+    border: 2px solid white;
+    left: 0;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+#home {
+    display: flex;
+    padding: 30px;
+}
+
+#song-list {
+    width: 50%;
+    margin: 20px;
+}
+
+#song-item {
+    list-style: none;
+    padding: 5px;
+}
+
+#audio-player {
+    margin: 20px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: fit-content;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    left: 60%;
+}
+
+
+#current-song {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#controls {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

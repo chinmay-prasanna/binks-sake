@@ -1,59 +1,7 @@
-.audio-track {
-    width: 250px;
-    height: 5px;
-    background-color: red;
-    position: relative;
-}
- 
-.time {
-    width: 0;
-    height: 5px;
+body {
     background-color: black;
-    position: absolute;
 }
 
-.seekbar {
-    width: 0;
-    height: 5px;
-    background-color: brown;
-    position: absolute;
-    opacity: 0;
-}
-
-.seekbar-icon {
-    margin: 0;
-    padding: 0;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    top: -5px;    
-    background-color: brown;
-    border-radius: 50%;
-    border: 2px solid white;
-    left: 0;
-    transform: translateX(-50%);
-    opacity: 0;
-}
-#home {
-    display: flex;
-}
-
-#song-list {
-    width: 50%;
-}
-
-#audio-player {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    width: 25%;
-    height: fit-content;
-    align-items: center;
-    margin-top: 10px;
-    background-color: aquamarine;
-    left: 60%;
-}
-
-#controls {
-    margin-top: 20px;
+.vl {
+    border-left: 1px solid rgb(175, 174, 174, 0.3);
 }

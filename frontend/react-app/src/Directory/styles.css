@@ -1,0 +1,33 @@
+#directory-tabs {
+    margin: 20px;
+    margin-right: 40px;
+    color: rgb(194, 193, 193);
+    background-color: black;
+}
+
+#directory-tabs h1 {
+    margin-bottom: 20px;
+}
+
+#heading {
+    width: fit-content;
+}
+
+#heading-ul {
+    margin-top: 8px;
+    border-bottom: 1px solid rgb(175, 174, 174, 0.3);
+}
+
+#dir-tab {
+    padding: 10px;
+}
+
+#dir-tab:hover {
+    background-color: rgb(166, 164, 164);
+    color: black;
+    transition-duration: 0.2s;
+}
+
+#add-dir-button {
+    margin-top: 30px;
+}
