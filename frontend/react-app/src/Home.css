@@ -5,3 +5,33 @@ body {
 .vl {
     border-left: 1px solid rgb(175, 174, 174, 0.3);
 }
+
+.auth-modal {
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #27282a #0d0d0d;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #565869;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #363740;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #1e1e2f;
+    border-radius: 4px;
+}

@@ -1,0 +1,56 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 250px;
+    background-color: white;
+}
+
+#form-input {
+    width: 250px;
+    padding: 8px;
+    margin: 4px;
+}
+
+#signup-submit-button {
+    margin-top: 20px;
+    width: 20%;
+}
+
+#login-submit-button {
+    margin-top: 20px;
+    width: 10%;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.tabs {
+    width: 500px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 100px 20px 100px;
+}
+
+.tabs :hover {
+    cursor: pointer;
+} 
+
+#auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 550px;
+    height: 350px;
+    border-radius: 20px;
+}

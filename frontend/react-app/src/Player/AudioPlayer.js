@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import Button from 'react-bootstrap/Button'
 
-function Player({ songs, playSong, audioRef, currentSongIndex, isPlaying }) {
+function Player({ songs, playSong, audioRef, currentSongIndex, isPlaying, isLoggedIn }) {
     const [isShuffled, setIsShuffled] = useState(false)
 
     const timeRef = useRef(null)
@@ -16,14 +16,19 @@ function Player({ songs, playSong, audioRef, currentSongIndex, isPlaying }) {
 
     const [paused, setPaused] = useState(true)
 
-
+    console.log(isLoggedIn)
     useEffect(() => {
         setCurrentQueue(songs)
 
     }, [songs])
 
     useEffect(() => {
-        setCurSongName(songs[currentSongIndex])
+        if (Object.keys(songs).length>0){
+            let albumArt = songs[currentSongIndex]['album_art']
+            document.getElementById("album-art").src = `data:image/jpeg;base64,${albumArt}`
+
+            setCurSongName(songs[currentSongIndex]['file'])
+        }
 
     }, [currentSongIndex])
 
@@ -113,7 +118,11 @@ function Player({ songs, playSong, audioRef, currentSongIndex, isPlaying }) {
             <div id='current-song'>
                 {curSongName}
             </div>                
-            <div className="audio-track" ref={audioTrackRef} onMouseMove={(e) => onSeekBarMouseEnter(e)} onMouseLeave={(e) => onSeekBarMouseLeave()} onClick={(e) => onSeek(e)}>
+            <div className="audio-track" ref={audioTrackRef} onMouseMove={(e) => onSeekBarMouseEnter(e)} onMouseLeave={(e) => onSeekBarMouseLeave()} onClick={(e) => onSeek(e)}
+                style={{
+                    zIndex: isLoggedIn ? 1 : -1
+                }}
+            >
                     <div class="seekbar" 
                             style={{
                                 width: `${seekbarWidth}px`,
@@ -134,6 +143,9 @@ function Player({ songs, playSong, audioRef, currentSongIndex, isPlaying }) {
                 {/* <Button variant='light' size="sm" id='toggle-shuffle' onClick={() => toggleShuffle()}style={{backgroundColor: isShuffled ? 'black' : 'white', color: isShuffled ? 'white' : 'black'}}>SHUFFLE</Button> */}
                 <Button variant='light' size="sm" id='audio-next' onClick={() => prevSong()}>PREV</Button>
                 <Button variant='light' size="sm" id='audio-prev' onClick={() => nextSong()}>NEXT</Button>
+            </div>
+            <div id="album-art-container">
+                <img id="album-art"></img>
             </div>
             <audio ref={audioRef}></audio>
         </div>

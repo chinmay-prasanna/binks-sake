@@ -8,6 +8,9 @@ import urllib
 import database
 import orm, schemas, models
 from . import auth
+from mutagen.mp3 import MP3
+from mutagen.id3 import ID3, APIC
+import base64
 
 router = APIRouter()
 
@@ -35,14 +38,35 @@ async def get_song_list(song: str=None, directory_id:int=None, user: models.User
             continue
         for file in files_in_dir:
             if file.endswith(".mp3") or file.endswith(".wav"):
+                album_art = None
+                try:
+                    audio = MP3(f"{directory.dir_path}/{directory.dir_name}/{file}", ID3=ID3)
+                    if audio.tags:
+                        for tag in audio.tags.values():
+                            if isinstance(tag, APIC):
+                                album_art = base64.b64encode(tag.data).decode("utf-8")
+                                res.update({
+                                    i:{
+                                        "album_art":album_art
+                                    }
+                                })
+                                break
+                except Exception as e:
+                    print(f"Error extracting album art: {e}")
+                if album_art is None:
+                    res.update({
+                        i:{
+                            "album_art":None
+                        }
+                    })
                 if song and song.lower() in file.lower():
-                    res.update({i:file})
+                    res[i].update({"file":file})
                     i+=1
                 elif song:
                     continue
                 else:
-                    res.update({i:file})
-                    i+=1
+                    res[i].update({"file":file})
+                    i+=1             
 
     return JSONResponse(res)
 
@@ -72,6 +96,7 @@ async def stream(song, dir, request: Request, db: Session = Depends(get_db)):
                 end = file_size - 1
         def streamer(start_pos, end_pos):
             try:
+
                 with open(file, 'rb') as _file:
                     _file.seek(start_pos)
                     bytes_to_read = end_pos - start_pos + 1
@@ -85,7 +110,7 @@ async def stream(song, dir, request: Request, db: Session = Depends(get_db)):
 
             except Exception as e:
                 print((str(e)))
-
+        
         response = StreamingResponse(
             streamer(start, end), 
             media_type="audio/mpeg",

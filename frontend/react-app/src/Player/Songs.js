@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import Button from 'react-bootstrap/Button'
 import './styles.css'
 import axios from "axios";
+import api from "../api";
 
 function Songs({ directoryId, setSongs, songs, playSong }) {
     const songListRef = useRef(null)
@@ -10,7 +11,7 @@ function Songs({ directoryId, setSongs, songs, playSong }) {
         async function getSongs() {
             try {
                 let url = `http://localhost:8000/songs?directory_id=${directoryId}`
-                await axios.get(url).then(response => {
+                await api.get(url).then(response => {
                     setSongs(response.data)
                 })
             } catch (error) {
@@ -24,17 +25,15 @@ function Songs({ directoryId, setSongs, songs, playSong }) {
 
     return (
         <div id="song-list" ref={songListRef}>
-            <ul>
                 {Object.entries(songs).map(([index, song]) => {
                     return (
-                        <li id="song-item">
+                        <div id="song-item">
                             <Button size="sm" variant="dark" key={index} onClick={() => playSong(index)}>
-                                {song}
+                                {song["file"]}
                             </Button>
-                        </li>
+                        </div>
                     )
                 })}
-            </ul>
         </div>
     )
 }

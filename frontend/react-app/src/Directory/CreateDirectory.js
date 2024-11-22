@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
 
 function CreateDirectory() {
     const navigate = useNavigate()
@@ -10,7 +11,7 @@ function CreateDirectory() {
 
     async function createDirectory() {
         try {
-            const {data} = await axios.post("http://localhost:8000/directory/create/", {dir_name: dirName, dir_path: dirPath, description: dirDescription})
+            const {data} = await api.post("http://localhost:8000/directory/create/", {dir_name: dirName, dir_path: dirPath, description: dirDescription})
             navigate("/")
         } catch (error) {
             console.error(error)
